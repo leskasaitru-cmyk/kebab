@@ -207,35 +207,6 @@
 
   .section-title .accent { color: var(--orange); }
 
-  .menu-tabs {
-    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
-    margin-bottom: 50px;
-  }
-
-  .menu-tab {
-    padding: 12px 26px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 15px; font-weight: 600;
-    font-family: inherit;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-  }
-  .menu-tab:hover { border-color: var(--orange); color: var(--orange); }
-  .menu-tab.active {
-    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-    color: #fff;
-    border-color: transparent;
-    box-shadow: 0 8px 20px var(--shadow-hover);
-    font-weight: 800;
-  }
-
-  .menu-category { display: none; }
-  .menu-category.active { display: block; }
-
   .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -289,20 +260,29 @@
     z-index: 1;
   }
 
-  .dish-price-badge {
+  /* Кнопка "Уточнить" на месте ценника */
+  .dish-cta {
     position: absolute;
     bottom: 16px;
     right: 16px;
     z-index: 2;
-    padding: 10px 20px;
+    padding: 10px 22px;
     background: linear-gradient(135deg, var(--orange), var(--orange-dark));
     color: #fff;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 800;
     border-radius: 100px;
     box-shadow: 0 8px 20px rgba(255, 122, 26, 0.5);
     letter-spacing: -0.3px;
     white-space: nowrap;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .dish-cta:hover {
+    transform: scale(1.06);
+    box-shadow: 0 10px 30px rgba(255, 122, 26, 0.7);
   }
 
   .dish-body {
@@ -339,12 +319,13 @@
     transform: scale(1.1) rotate(-5deg);
   }
 
+  /* ===== О НАС ===== */
   .about { background: var(--bg-soft); }
 
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 60px;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 30px;
     align-items: center;
   }
 
@@ -356,80 +337,27 @@
     position: relative; overflow: hidden;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .about-slide {
-    position: absolute;
-    inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    padding: 20px;
     text-align: center;
+    padding: 20px;
   }
 
-  .about-slide.active { opacity: 1; }
-
-  .about-slide .icon { font-size: 110px; margin-bottom: 16px; }
-  .about-slide .text {
+  .about-visual .icon { font-size: 110px; margin-bottom: 16px; }
+  .about-visual .text {
     font-size: 14px; color: var(--text-muted);
     padding: 0 20px;
   }
 
-  .about-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    inset: 0;
+  .about-text {
+    text-align: center;
+    padding: 0 10px;
   }
-
-  .about-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: rgba(26, 15, 8, 0.7);
-    border: 1px solid var(--orange);
-    color: var(--orange);
-    font-size: 20px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    z-index: 5;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-  .about-nav:hover { background: var(--orange); color: #fff; }
-  .about-nav.prev { left: 12px; }
-  .about-nav.next { right: 12px; }
-
-  .about-dots {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex; gap: 8px;
-    z-index: 5;
-  }
-
-  .about-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 245, 232, 0.3);
-    border: 1px solid var(--orange);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .about-dot.active { background: var(--orange); }
 
   .about-text h2 {
     font-family: Georgia, serif;
-    font-size: clamp(28px, 4vw, 44px);
+    font-size: clamp(24px, 3.5vw, 38px);
     font-weight: 800; letter-spacing: -1.5px;
     line-height: 1.2; margin-bottom: 24px;
   }
@@ -437,21 +365,22 @@
 
   .about-text p {
     color: var(--text-muted);
-    font-size: 16px; line-height: 1.8; margin-bottom: 16px;
+    font-size: 15px; line-height: 1.8; margin-bottom: 16px;
   }
 
-  .about-points { list-style: none; margin-top: 28px; }
+  .about-points { list-style: none; margin-top: 28px; text-align: left; display: inline-block; }
   .about-points li {
     position: relative;
-    padding: 10px 0 10px 34px;
+    padding: 8px 0 8px 34px;
     font-size: 15px; color: var(--text);
   }
   .about-points li::before {
     content: '✨';
-    position: absolute; left: 0; top: 10px;
+    position: absolute; left: 0; top: 8px;
     font-size: 18px;
   }
 
+  /* ===== CTA ===== */
   .cta { padding: 100px 0; }
 
   .cta-box {
@@ -485,6 +414,7 @@
   }
   .btn-dark:hover { transform: translateY(-3px); background: #000; }
 
+  /* ===== КОНТАКТЫ ===== */
   .contacts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -542,11 +472,22 @@
   }
   footer .footer-logo span { color: var(--orange); }
 
+  /* ===== АДАПТИВ ===== */
+  @media (max-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .about-text {
+      grid-column: 1 / -1;
+      order: 3;
+      margin-top: 20px;
+    }
+    .about-visual { aspect-ratio: 4 / 3; }
+  }
+
   @media (max-width: 900px) {
     nav { display: none; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-visual { aspect-ratio: 16 / 9; max-width: 500px; margin: 0 auto; width: 100%; }
-    .about-slide .icon { font-size: 90px; }
     .menu-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
   }
 
@@ -558,6 +499,25 @@
     .menu-grid { grid-template-columns: 1fr; }
     .dish { min-height: auto; }
     .dish-photo { height: 200px; }
+    
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    
+    /* Фотографии — максимально большие и одинаковые на телефоне */
+    .about-visual {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      aspect-ratio: auto;
+      min-height: 340px;
+      padding: 30px 20px;
+    }
+    .about-visual .icon { font-size: 130px; margin-bottom: 20px; }
+    .about-visual .text { font-size: 16px; }
+
+    .about-text { order: 3; }
   }
 
   @media (max-width: 640px) {
@@ -572,19 +532,22 @@
     .hero-buttons { flex-direction: column; width: 100%; }
     .btn { width: 100%; padding: 16px 28px; font-size: 14px; }
 
-    .menu-tabs { gap: 6px; margin-bottom: 30px; }
-    .menu-tab { padding: 10px 18px; font-size: 14px; }
-
     .dish-photo { height: 180px; }
     .dish-photo .icon { font-size: 80px; }
     .dish-body { padding: 22px 22px 24px; }
     .dish-name { font-size: 20px; }
-    .dish-price-badge { font-size: 14px; padding: 8px 16px; bottom: 12px; right: 12px; }
+    .dish-cta { font-size: 13px; padding: 8px 18px; bottom: 12px; right: 12px; }
 
     .cta-box { padding: 50px 22px; border-radius: 20px; }
     .cta-buttons { flex-direction: column; width: 100%; }
 
-    .about-nav { width: 38px; height: 38px; font-size: 18px; }
+    /* Фото ещё крупнее и одинаковые на маленьких экранах */
+    .about-visual {
+      min-height: 360px;
+      padding: 30px 16px;
+    }
+    .about-visual .icon { font-size: 140px; }
+    .about-visual .text { font-size: 16px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -635,205 +598,191 @@
   <div class="container">
     <div class="section-head">
       <span class="section-label">✦ Меню</span>
-      <h2 class="section-title">Что у нас <span class="accent">есть</span></h2>
     </div>
 
-    <div class="menu-tabs">
-      <button class="menu-tab active" onclick="showCategory('grill', this)">🔥 Шашлык</button>
-      <button class="menu-tab" onclick="showCategory('veggies', this)">🍄 На мангале</button>
-      <button class="menu-tab" onclick="showCategory('snacks', this)">🍟 Закуски</button>
-      <button class="menu-tab" onclick="showCategory('drinks', this)">🥤 Напитки</button>
-    </div>
+    <div class="menu-grid">
 
-    <div class="menu-category active" id="grill">
-      <div class="menu-grid">
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🍖</div>
-            <div class="dish-price-badge">155 ₽ / 100 г</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Шашлык из свинины</div>
-            <p class="dish-desc">Шея. Маринованный лук добавляется на выбор покупателя, бесплатно.</p>
-          </div>
+      <!-- Шашлык из свинины -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🍖</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
         </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🍗</div>
-            <div class="dish-price-badge">Уточняется</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Шашлык из мяса курицы</div>
-            <p class="dish-desc">Сочная курица на углях с ароматными специями.</p>
-          </div>
+        <div class="dish-body">
+          <div class="dish-name">Шашлык из свинины</div>
+          <p class="dish-desc">Шея. Маринованный лук добавляется на выбор покупателя, бесплатно.</p>
         </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🥩</div>
-            <div class="dish-price-badge">Уточняется</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Стейк из семги</div>
-            <p class="dish-desc">Деликатесная красная рыба на углях.</p>
-          </div>
-        </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🍔</div>
-            <div class="dish-price-badge">Уточняется</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Бургер</div>
-            <p class="dish-desc">Фирменный бургер с сочным мясом и свежими овощами.</p>
-          </div>
-        </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🌭</div>
-            <div class="dish-price-badge">Уточняется</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Люля-кебаб из мяса говядины</div>
-            <p class="dish-desc">Ароматный люля-кебаб на углях. Подаётся с лавашем и соусом.</p>
-          </div>
-        </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🌯</div>
-            <div class="dish-price-badge">Уточняется</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Шаурма</div>
-            <p class="dish-desc">Свинина, курица или микс. Сытная и вкусная.</p>
-          </div>
-        </div>
-
       </div>
-    </div>
 
-    <div class="menu-category" id="veggies">
-      <div class="menu-grid">
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🍄</div>
-            <div class="dish-price-badge">150 ₽</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Шампиньоны на углях</div>
-            <p class="dish-desc">Ароматные шампиньоны на мангале. Идеальная закуска к шашлыку.</p>
-          </div>
+      <!-- Шашлык из курицы -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🍗</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
         </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🥦</div>
-            <div class="dish-price-badge">Уточняется</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Овощи на мангале</div>
-            <p class="dish-desc">Свежие овощи, запечённые на углях. Лёгкая и полезная закуска.</p>
-          </div>
+        <div class="dish-body">
+          <div class="dish-name">Шашлык из мяса курицы</div>
+          <p class="dish-desc">Сочная курица на углях с ароматными специями.</p>
         </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🫓</div>
-            <div class="dish-price-badge">70 ₽</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Лаваш</div>
-            <p class="dish-desc">Свежий тонкий лаваш к шашлыку и закускам.</p>
-          </div>
-        </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🥣</div>
-            <div class="dish-price-badge">100 ₽</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Соус белый</div>
-            <p class="dish-desc">Домашний белый соус. Отлично подходит к любому блюду.</p>
-          </div>
-        </div>
-
       </div>
-    </div>
 
-    <div class="menu-category" id="snacks">
-      <div class="menu-grid">
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🍟</div>
-            <div class="dish-price-badge">Уточняется</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Картофель фри</div>
-            <p class="dish-desc">Хрустящий картофель фри. К шашлыку — идеально.</p>
-          </div>
+      <!-- Стейк из семги -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🥩</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
         </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🥗</div>
-            <div class="dish-price-badge">Уточняется</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Салат</div>
-            <p class="dish-desc">Свежий салат из овощей. Спросите у продавца о наличии.</p>
-          </div>
+        <div class="dish-body">
+          <div class="dish-name">Стейк из семги</div>
+          <p class="dish-desc">Деликатесная красная рыба на углях.</p>
         </div>
-
       </div>
-    </div>
 
-    <div class="menu-category" id="drinks">
-      <div class="menu-grid">
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🍵</div>
-            <div class="dish-price-badge">от 80 ₽</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Чай</div>
-            <p class="dish-desc">Чёрный или зелёный чай. Согревает и освежает.</p>
-          </div>
+      <!-- Бургер -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🍔</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
         </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🥤</div>
-            <div class="dish-price-badge">от 100 ₽</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Газированные напитки</div>
-            <p class="dish-desc">Кола, спрайт, вода. Охлаждённые.</p>
-          </div>
+        <div class="dish-body">
+          <div class="dish-name">Бургер</div>
+          <p class="dish-desc">Фирменный бургер с котлетой и свежими овощами.</p>
         </div>
-
-        <div class="dish">
-          <div class="dish-photo">
-            <div class="icon">🍺</div>
-            <div class="dish-price-badge">Уточняется</div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-name">Пиво</div>
-            <p class="dish-desc">Разливное и бутылочное. К шашлыку — то, что надо.</p>
-          </div>
-        </div>
-
       </div>
-    </div>
 
+      <!-- Люля-кебаб -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🌭</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Люля-кебаб из мяса говядины</div>
+          <p class="dish-desc">Ароматный люля-кебаб на углях.</p>
+        </div>
+      </div>
+
+      <!-- Шаурма -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🌯</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Шаурма</div>
+          <p class="dish-desc">Свинина, курица или микс. Сытная и вкусная.</p>
+        </div>
+      </div>
+
+      <!-- Шампиньоны -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🍄</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Шампиньоны на углях</div>
+          <p class="dish-desc">Ароматные шампиньоны на мангале. Идеальная закуска к шашлыку.</p>
+        </div>
+      </div>
+
+      <!-- Овощи на мангале -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🥦</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Овощи на мангале</div>
+          <p class="dish-desc">Свежие овощи, запечённые на углях. Лёгкая и полезная закуска.</p>
+        </div>
+      </div>
+
+      <!-- Лаваш -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🫓</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Лаваш</div>
+          <p class="dish-desc">Свежий тонкий лаваш к шашлыку и закускам.</p>
+        </div>
+      </div>
+
+      <!-- Соус белый -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🥣</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Соус белый</div>
+          <p class="dish-desc">Домашний белый соус. Отлично подходит к любому блюду.</p>
+        </div>
+      </div>
+
+      <!-- Картофель фри -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🍟</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Картофель фри</div>
+          <p class="dish-desc">Хрустящий картофель фри. К шашлыку — идеально.</p>
+        </div>
+      </div>
+
+      <!-- Салат -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🥗</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Салат</div>
+          <p class="dish-desc">Свежий салат из овощей. Спросите у продавца о наличии.</p>
+        </div>
+      </div>
+
+      <!-- Чай -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🍵</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Чай</div>
+          <p class="dish-desc">Чёрный или зелёный чай. Согревает и освежает.</p>
+        </div>
+      </div>
+
+      <!-- Газированные напитки -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🥤</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Газированные напитки</div>
+          <p class="dish-desc">Кола, спрайт, вода. Охлаждённые.</p>
+        </div>
+      </div>
+
+      <!-- Пиво -->
+      <div class="dish">
+        <div class="dish-photo">
+          <div class="icon">🍺</div>
+          <a href="#booking" class="dish-cta">Уточнить</a>
+        </div>
+        <div class="dish-body">
+          <div class="dish-name">Пиво</div>
+          <p class="dish-desc">Разливное и бутылочное. К шашлыку — то, что надо.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -841,25 +790,14 @@
 <section class="about" id="about">
   <div class="container">
     <div class="about-grid">
+      
+      <!-- ЛЕВОЕ ИЗОБРАЖЕНИЕ -->
       <div class="about-visual">
-        <div class="about-slide active">
-          <div class="icon">🔥</div>
-          <div class="text">Здесь могла быть<br>фотография заведения</div>
-        </div>
-        <div class="about-slide">
-          <div class="icon">🍢</div>
-          <div class="text">Второе изображение<br>нашего заведения</div>
-        </div>
-
-        <button class="about-nav prev" onclick="changeSlide(-1)" aria-label="Предыдущее изображение">‹</button>
-        <button class="about-nav next" onclick="changeSlide(1)" aria-label="Следующее изображение">›</button>
-
-        <div class="about-dots">
-          <span class="about-dot active" onclick="goToSlide(0)"></span>
-          <span class="about-dot" onclick="goToSlide(1)"></span>
-        </div>
+        <div class="icon">🔥</div>
+        <div class="text">Здесь могла быть<br>фотография заведения</div>
       </div>
 
+      <!-- ТЕКСТ ПО ЦЕНТРУ -->
       <div class="about-text">
         <h2>Устройте себе <span class="accent">праздник вкуса!</span></h2>
         <p>Наши два кафе всегда готовы радовать вас любимыми блюдами:</p>
@@ -872,6 +810,13 @@
           <li>Освежающие напитки на любой вкус.</li>
         </ul>
       </div>
+
+      <!-- ПРАВОЕ ИЗОБРАЖЕНИЕ -->
+      <div class="about-visual">
+        <div class="icon">🍢</div>
+        <div class="text">Здесь могла быть<br>вторая фотография</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -901,7 +846,7 @@
       <a href="https://yandex.ru/maps/org/shashlychnaya/36257008439/" target="_blank" rel="noopener" class="contact-card">
         <span class="contact-icon">📍</span>
         <div class="value">ул. Бардина, 27А</div>
-        <div class="note">Оленегорск</div>
+        <div class="note">Оленегорск, 184536</div>
       </a>
 
       <div class="contact-card">
@@ -913,7 +858,7 @@
       <div class="contact-card">
         <span class="contact-icon">🕐</span>
         <h3>Часы работы</h3>
-        <div class="value">Работаем с 11.00 до 21.00 всегда</div>
+        <div class="value">Работаем с 11.00 до 21.00</div>
       </div>
 
       <div class="contact-card">
@@ -923,7 +868,7 @@
         <div class="note">Заказ и доставка</div>
       </div>
 
-      <a href="https://vk.ru/shashlichnaya_olenegorsk" target="_blank" rel="noopener" class="contact-card">
+      <a href="https://vk.com/shashlychnaya_olenegorsk" target="_blank" rel="noopener" class="contact-card">
         <span class="contact-icon">🔵</span>
         <h3>ВКонтакте</h3>
         <div class="value">Мы в ВК</div>
@@ -942,38 +887,7 @@
 </footer>
 
 <script>
-  function showCategory(category, btn) {
-    document.querySelectorAll('.menu-category').forEach(cat => {
-      cat.classList.remove('active');
-    });
-    document.getElementById(category).classList.add('active');
-
-    document.querySelectorAll('.menu-tab').forEach(tab => {
-      tab.classList.remove('active');
-    });
-    btn.classList.add('active');
-  }
-
-  /* Слайдер в блоке "О нас" */
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.about-slide');
-  const dots = document.querySelectorAll('.about-dot');
-
-  function renderSlide() {
-    slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
-    dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-  }
-
-  function changeSlide(dir) {
-    currentSlide = (currentSlide + dir + slides.length) % slides.length;
-    renderSlide();
-  }
-
-  function goToSlide(index) {
-    currentSlide = index;
-    renderSlide();
-  }
-
+  /* --- Плавное появление секций --- */
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!prefersReduced && 'IntersectionObserver' in window) {
@@ -1014,6 +928,7 @@
     });
   }
 
+  /* --- Плавный скролл по якорям (в т.ч. кнопок "Уточнить") --- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const target = document.querySelector(this.getAttribute('href'));
