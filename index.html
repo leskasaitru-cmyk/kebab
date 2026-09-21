@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1a0f08">
-<title>Шашлычная — Первый вариант сайта</title>
+<title>Шашлычная</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
@@ -182,19 +182,10 @@
   }
   .btn-ghost:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-soft); }
 
-  .hero-info {
-    display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
-    padding-top: 40px; border-top: 1px solid var(--border);
+  .hero-divider {
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
   }
-
-  .hero-info-item {
-    display: flex; align-items: center; gap: 10px;
-    color: var(--text-muted);
-    font-size: 15px; font-weight: 500;
-    text-decoration: none; transition: color 0.3s;
-  }
-  a.hero-info-item:hover { color: var(--orange); }
-  .hero-info-item .icon { font-size: 18px; }
 
   section { padding: 90px 0; }
 
@@ -218,15 +209,15 @@
 
   .menu-tabs {
     display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
 
   .menu-tab {
-    padding: 10px 22px;
+    padding: 12px 26px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 100px;
-    font-size: 14px; font-weight: 600;
+    font-size: 15px; font-weight: 600;
     font-family: inherit;
     color: var(--text-muted);
     cursor: pointer;
@@ -245,143 +236,108 @@
   .menu-category { display: none; }
   .menu-category.active { display: block; }
 
-  .menu-list { max-width: 900px; margin: 0 auto; }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 
   .dish {
     position: relative;
-    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-soft) 100%);
+    background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-soft) 100%);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    margin-bottom: 12px;
+    border-radius: 24px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    padding-left: 6px;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
   }
 
-  .dish::before {
+  .dish-photo {
+    height: 220px;
+    background: linear-gradient(135deg, rgba(255, 122, 26, 0.15), rgba(230, 57, 70, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .dish-photo::before {
     content: '';
     position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, var(--orange), var(--red));
-    opacity: 0.4;
-    transition: width 0.4s ease, opacity 0.3s ease;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(255, 122, 26, 0.25), transparent 60%);
+  }
+
+  .dish-photo .icon {
+    font-size: 100px;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dish-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+  }
+
+  .dish-price-badge {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    z-index: 2;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+    border-radius: 100px;
+    box-shadow: 0 8px 20px rgba(255, 122, 26, 0.5);
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+  }
+
+  .dish-body {
+    padding: 28px 28px 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .dish-name {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .dish-desc {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    flex-grow: 1;
   }
 
   .dish:hover {
     border-color: var(--orange);
-    box-shadow: 0 15px 40px rgba(255, 122, 26, 0.15), 0 0 0 1px var(--orange);
-    transform: translateX(4px);
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(255, 122, 26, 0.2), 0 0 0 1px var(--orange);
   }
 
-  .dish:hover::before { opacity: 1; width: 6px; }
-
-  .dish.open {
-    border-color: var(--orange);
-    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255, 122, 26, 0.08) 100%);
-    box-shadow: 0 20px 50px rgba(255, 122, 26, 0.2), 0 0 0 1px var(--orange);
+  .dish:hover .dish-photo .icon {
+    transform: scale(1.1) rotate(-5deg);
   }
-
-  .dish.open::before {
-    opacity: 1; width: 6px;
-    background: linear-gradient(180deg, var(--orange-light), var(--orange), var(--red));
-  }
-
-  .dish-header {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px;
-    padding: 20px 24px;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.3s ease;
-  }
-
-  .dish-header:hover { background: rgba(255, 122, 26, 0.05); }
-
-  .dish-name {
-    font-family: Georgia, serif;
-    font-size: 18px; font-weight: 700;
-    letter-spacing: -0.3px;
-    color: var(--text); line-height: 1.3;
-    flex-grow: 1;
-    transition: color 0.3s ease;
-  }
-
-  .dish:hover .dish-name { color: var(--orange-light); }
-
-  .dish-price {
-    font-size: 16px; font-weight: 800;
-    color: var(--orange);
-    white-space: nowrap;
-    letter-spacing: -0.3px;
-    padding: 6px 14px;
-    background: rgba(255, 122, 26, 0.12);
-    border: 1px solid rgba(255, 122, 26, 0.3);
-    border-radius: 100px;
-    transition: all 0.3s ease;
-  }
-
-  .dish:hover .dish-price {
-    background: var(--orange);
-    color: #fff;
-    border-color: var(--orange);
-    box-shadow: 0 6px 16px rgba(255, 122, 26, 0.4);
-  }
-
-  .dish.open .dish-price {
-    background: var(--orange);
-    color: #fff;
-    border-color: var(--orange);
-  }
-
-  .dish-arrow {
-    color: var(--orange);
-    font-size: 12px;
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    margin-left: 4px;
-    flex-shrink: 0;
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: rgba(255, 122, 26, 0.1);
-    display: flex; align-items: center; justify-content: center;
-  }
-
-  .dish:hover .dish-arrow { background: rgba(255, 122, 26, 0.2); }
-
-  .dish.open .dish-arrow {
-    transform: rotate(180deg);
-    background: var(--orange);
-    color: #fff;
-  }
-
-  .dish-details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                padding 0.4s ease, opacity 0.3s ease;
-    opacity: 0;
-    padding: 0 24px;
-  }
-
-  .dish.open .dish-details {
-    max-height: 300px;
-    opacity: 1;
-    padding: 0 24px 24px;
-  }
-
-  .dish-details-inner {
-    padding: 16px 18px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    border-left: 3px solid var(--orange);
-  }
-
-  .dish-info {
-    color: var(--text-muted);
-    font-size: 14px; line-height: 1.7;
-  }
-
-  .dish-info strong { color: var(--orange-light); font-weight: 700; }
 
   .about { background: var(--bg-soft); }
 
@@ -397,16 +353,79 @@
     border-radius: 24px;
     background: linear-gradient(135deg, var(--bg-card), var(--bg-soft));
     border: 1px solid var(--orange);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
     position: relative; overflow: hidden;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .about-visual .icon { font-size: 110px; margin-bottom: 16px; }
-  .about-visual .text {
+
+  .about-slide {
+    position: absolute;
+    inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .about-slide.active { opacity: 1; }
+
+  .about-slide .icon { font-size: 110px; margin-bottom: 16px; }
+  .about-slide .text {
     font-size: 14px; color: var(--text-muted);
-    text-align: center; padding: 0 20px;
+    padding: 0 20px;
   }
+
+  .about-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+
+  .about-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(26, 15, 8, 0.7);
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .about-nav:hover { background: var(--orange); color: #fff; }
+  .about-nav.prev { left: 12px; }
+  .about-nav.next { right: 12px; }
+
+  .about-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px;
+    z-index: 5;
+  }
+
+  .about-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 245, 232, 0.3);
+    border: 1px solid var(--orange);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .about-dot.active { background: var(--orange); }
 
   .about-text h2 {
     font-family: Georgia, serif;
@@ -428,7 +447,7 @@
     font-size: 15px; color: var(--text);
   }
   .about-points li::before {
-    content: '🔥';
+    content: '✨';
     position: absolute; left: 0; top: 10px;
     font-size: 18px;
   }
@@ -508,33 +527,6 @@
     font-size: 13px; color: var(--text-muted); margin-top: 6px;
   }
 
-  .switch-block {
-    padding: 80px 0;
-    background: var(--bg-soft);
-    text-align: center;
-  }
-
-  .switch-label {
-    font-size: 13px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
-
-  .switch-title {
-    font-family: Georgia, serif;
-    font-size: clamp(24px, 4vw, 40px);
-    font-weight: 800;
-    letter-spacing: -1.5px;
-    color: var(--text);
-    margin-bottom: 32px;
-    line-height: 1.2;
-  }
-
-  .switch-title .accent { color: var(--orange); }
-
   footer {
     padding: 50px 0 30px;
     text-align: center;
@@ -553,8 +545,9 @@
   @media (max-width: 900px) {
     nav { display: none; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-visual { aspect-ratio: 16 / 9; max-width: 500px; margin: 0 auto; }
-    .about-visual .icon { font-size: 90px; }
+    .about-visual { aspect-ratio: 16 / 9; max-width: 500px; margin: 0 auto; width: 100%; }
+    .about-slide .icon { font-size: 90px; }
+    .menu-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
   }
 
   @media (max-width: 768px) {
@@ -562,6 +555,9 @@
     section { padding: 60px 0; }
     .hero { padding: 140px 0 60px; }
     .cta-box { padding: 60px 28px; border-radius: 22px; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .dish { min-height: auto; }
+    .dish-photo { height: 200px; }
   }
 
   @media (max-width: 640px) {
@@ -575,19 +571,20 @@
     section { padding: 50px 0; }
     .hero-buttons { flex-direction: column; width: 100%; }
     .btn { width: 100%; padding: 16px 28px; font-size: 14px; }
-    .hero-info { flex-direction: column; gap: 12px; align-items: center; }
 
     .menu-tabs { gap: 6px; margin-bottom: 30px; }
-    .menu-tab { padding: 8px 16px; font-size: 13px; }
+    .menu-tab { padding: 10px 18px; font-size: 14px; }
 
-    .dish-header { padding: 16px 18px; gap: 10px; }
-    .dish-name { font-size: 16px; }
-    .dish-price { font-size: 14px; padding: 5px 12px; }
-    .dish-details { padding: 0 18px; }
-    .dish.open .dish-details { padding: 0 18px 18px; }
+    .dish-photo { height: 180px; }
+    .dish-photo .icon { font-size: 80px; }
+    .dish-body { padding: 22px 22px 24px; }
+    .dish-name { font-size: 20px; }
+    .dish-price-badge { font-size: 14px; padding: 8px 16px; bottom: 12px; right: 12px; }
 
     .cta-box { padding: 50px 22px; border-radius: 20px; }
     .cta-buttons { flex-direction: column; width: 100%; }
+
+    .about-nav { width: 38px; height: 38px; font-size: 18px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -622,28 +619,14 @@
 <!-- ГЕРОЙ -->
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">★ Первый вариант · Два заведения в городе</div>
+    <div class="hero-badge">★ Два заведения в городе</div>
     <h1>Шашлык<br><span class="accent">на мангале</span></h1>
-    <p>Сочное мясо на углях, свежие овощи и домашние соусы. Готовим каждый день в Оленегорске. Еда навынос и доставка.</p>
+    <p>Любите блюда с дымком? Мы предлагаем широкий выбор мангального меню: от традиционного шашлыка и люля до деликатесной красной рыбы и сытной шаурмы. Дополните трапезу овощами гриль или порцией горячего картофеля фри.</p>
     <div class="hero-buttons">
       <a href="#menu" class="btn btn-primary">Смотреть меню</a>
-      <a href="#booking" class="btn btn-ghost">Заказать</a>
     </div>
 
-    <div class="hero-info">
-      <a href="https://yandex.ru/maps/org/shashlychnaya/36257008439/" target="_blank" rel="noopener" class="hero-info-item">
-        <span class="icon">📍</span>
-        Бардина, 27А
-      </a>
-      <div class="hero-info-item">
-        <span class="icon">📍</span>
-        Парковая, 13А
-      </div>
-      <a href="tel:+79210423878" class="hero-info-item">
-        <span class="icon">📞</span>
-        +7 (921) 042-38-78
-      </a>
-    </div>
+    <div class="hero-divider"></div>
   </div>
 </section>
 
@@ -663,200 +646,191 @@
     </div>
 
     <div class="menu-category active" id="grill">
-      <div class="menu-list">
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
-            <div class="dish-name">Шашлык из свинины <span style="color: var(--text-muted); font-size: 13px;">(100 г)</span></div>
-            <div class="dish-price">155 ₽</div>
-            <div class="dish-arrow">▼</div>
+      <div class="menu-grid">
+
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🍖</div>
+            <div class="dish-price-badge">155 ₽ / 100 г</div>
           </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Свиная шея на углях. Подаётся с маринованным луком и лавашем.</div>
-            </div>
+          <div class="dish-body">
+            <div class="dish-name">Шашлык из свинины</div>
+            <p class="dish-desc">Шея. Маринованный лук добавляется на выбор покупателя, бесплатно.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
-            <div class="dish-name">Шашлык из курицы</div>
-            <div class="dish-price">Уточняется</div>
-            <div class="dish-arrow">▼</div>
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🍗</div>
+            <div class="dish-price-badge">Уточняется</div>
           </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Сочная курица на углях с ароматными специями.</div>
-            </div>
+          <div class="dish-body">
+            <div class="dish-name">Шашлык из мяса курицы</div>
+            <p class="dish-desc">Сочная курица на углях с ароматными специями.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
-            <div class="dish-name">Шашлык из баранины</div>
-            <div class="dish-price">Уточняется</div>
-            <div class="dish-arrow">▼</div>
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🥩</div>
+            <div class="dish-price-badge">Уточняется</div>
           </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Мякоть барашка на углях.</div>
-            </div>
+          <div class="dish-body">
+            <div class="dish-name">Стейк из семги</div>
+            <p class="dish-desc">Деликатесная красная рыба на углях.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
-            <div class="dish-name">Люля-кебаб</div>
-            <div class="dish-price">Уточняется</div>
-            <div class="dish-arrow">▼</div>
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🍔</div>
+            <div class="dish-price-badge">Уточняется</div>
           </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Ароматный люля-кебаб на углях.</div>
-            </div>
+          <div class="dish-body">
+            <div class="dish-name">Бургер</div>
+            <p class="dish-desc">Фирменный бургер с сочным мясом и свежими овощами.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🌭</div>
+            <div class="dish-price-badge">Уточняется</div>
+          </div>
+          <div class="dish-body">
+            <div class="dish-name">Люля-кебаб из мяса говядины</div>
+            <p class="dish-desc">Ароматный люля-кебаб на углях. Подаётся с лавашем и соусом.</p>
+          </div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🌯</div>
+            <div class="dish-price-badge">Уточняется</div>
+          </div>
+          <div class="dish-body">
             <div class="dish-name">Шаурма</div>
-            <div class="dish-price">Уточняется</div>
-            <div class="dish-arrow">▼</div>
-          </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Шаурма с мясом и свежими овощами.</div>
-            </div>
+            <p class="dish-desc">Свинина, курица или микс. Сытная и вкусная.</p>
           </div>
         </div>
+
       </div>
     </div>
 
     <div class="menu-category" id="veggies">
-      <div class="menu-list">
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
+      <div class="menu-grid">
+
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🍄</div>
+            <div class="dish-price-badge">150 ₽</div>
+          </div>
+          <div class="dish-body">
             <div class="dish-name">Шампиньоны на углях</div>
-            <div class="dish-price">150 ₽</div>
-            <div class="dish-arrow">▼</div>
-          </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Шампиньоны на мангале.</div>
-            </div>
+            <p class="dish-desc">Ароматные шампиньоны на мангале. Идеальная закуска к шашлыку.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🥦</div>
+            <div class="dish-price-badge">Уточняется</div>
+          </div>
+          <div class="dish-body">
             <div class="dish-name">Овощи на мангале</div>
-            <div class="dish-price">Уточняется</div>
-            <div class="dish-arrow">▼</div>
-          </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Овощи гриль на мангале.</div>
-            </div>
+            <p class="dish-desc">Свежие овощи, запечённые на углях. Лёгкая и полезная закуска.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🫓</div>
+            <div class="dish-price-badge">70 ₽</div>
+          </div>
+          <div class="dish-body">
             <div class="dish-name">Лаваш</div>
-            <div class="dish-price">70 ₽</div>
-            <div class="dish-arrow">▼</div>
-          </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Свежий лаваш к шашлыку.</div>
-            </div>
+            <p class="dish-desc">Свежий тонкий лаваш к шашлыку и закускам.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
-            <div class="dish-name">Соус белый</div>
-            <div class="dish-price">100 ₽</div>
-            <div class="dish-arrow">▼</div>
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🥣</div>
+            <div class="dish-price-badge">100 ₽</div>
           </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Домашний белый соус.</div>
-            </div>
+          <div class="dish-body">
+            <div class="dish-name">Соус белый</div>
+            <p class="dish-desc">Домашний белый соус. Отлично подходит к любому блюду.</p>
           </div>
         </div>
+
       </div>
     </div>
 
     <div class="menu-category" id="snacks">
-      <div class="menu-list">
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
-            <div class="dish-name">Картофель фри</div>
-            <div class="dish-price">Уточняется</div>
-            <div class="dish-arrow">▼</div>
+      <div class="menu-grid">
+
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🍟</div>
+            <div class="dish-price-badge">Уточняется</div>
           </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Хрустящий картофель фри.</div>
-            </div>
+          <div class="dish-body">
+            <div class="dish-name">Картофель фри</div>
+            <p class="dish-desc">Хрустящий картофель фри. К шашлыку — идеально.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
-            <div class="dish-name">Салат</div>
-            <div class="dish-price">Уточняется</div>
-            <div class="dish-arrow">▼</div>
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🥗</div>
+            <div class="dish-price-badge">Уточняется</div>
           </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Свежий салат из овощей.</div>
-            </div>
+          <div class="dish-body">
+            <div class="dish-name">Салат</div>
+            <p class="dish-desc">Свежий салат из овощей. Спросите у продавца о наличии.</p>
           </div>
         </div>
+
       </div>
     </div>
 
     <div class="menu-category" id="drinks">
-      <div class="menu-list">
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
+      <div class="menu-grid">
+
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🍵</div>
+            <div class="dish-price-badge">от 80 ₽</div>
+          </div>
+          <div class="dish-body">
             <div class="dish-name">Чай</div>
-            <div class="dish-price">от 80 ₽</div>
-            <div class="dish-arrow">▼</div>
-          </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Чёрный, зелёный.</div>
-            </div>
+            <p class="dish-desc">Чёрный или зелёный чай. Согревает и освежает.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🥤</div>
+            <div class="dish-price-badge">от 100 ₽</div>
+          </div>
+          <div class="dish-body">
             <div class="dish-name">Газированные напитки</div>
-            <div class="dish-price">от 100 ₽</div>
-            <div class="dish-arrow">▼</div>
-          </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Кола, спрайт, вода.</div>
-            </div>
+            <p class="dish-desc">Кола, спрайт, вода. Охлаждённые.</p>
           </div>
         </div>
 
-        <div class="dish" onclick="toggleDish(this)">
-          <div class="dish-header">
-            <div class="dish-name">Пиво</div>
-            <div class="dish-price">Уточняется</div>
-            <div class="dish-arrow">▼</div>
+        <div class="dish">
+          <div class="dish-photo">
+            <div class="icon">🍺</div>
+            <div class="dish-price-badge">Уточняется</div>
           </div>
-          <div class="dish-details">
-            <div class="dish-details-inner">
-              <div class="dish-info"><strong>Описание:</strong> Разливное и бутылочное.</div>
-            </div>
+          <div class="dish-body">
+            <div class="dish-name">Пиво</div>
+            <p class="dish-desc">Разливное и бутылочное. К шашлыку — то, что надо.</p>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -868,20 +842,34 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-visual">
-        <div class="icon">🔥</div>
-        <div class="text">Здесь могла быть<br>фотография заведения</div>
+        <div class="about-slide active">
+          <div class="icon">🔥</div>
+          <div class="text">Здесь могла быть<br>фотография заведения</div>
+        </div>
+        <div class="about-slide">
+          <div class="icon">🍢</div>
+          <div class="text">Второе изображение<br>нашего заведения</div>
+        </div>
+
+        <button class="about-nav prev" onclick="changeSlide(-1)" aria-label="Предыдущее изображение">‹</button>
+        <button class="about-nav next" onclick="changeSlide(1)" aria-label="Следующее изображение">›</button>
+
+        <div class="about-dots">
+          <span class="about-dot active" onclick="goToSlide(0)"></span>
+          <span class="about-dot" onclick="goToSlide(1)"></span>
+        </div>
       </div>
 
       <div class="about-text">
-        <h2>Два заведения <span class="accent">в Оленегорске</span></h2>
-        <p>«Шашлычная» — готовим шашлык и блюда на мангале каждый день. Сочное мясо, свежие овощи, домашние соусы.</p>
-        <p>Две точки в городе: на Бардина, 27А и на Парковой, 13А. Работаем с 11 утра. Еда навынос и доставка по городу.</p>
+        <h2>Устройте себе <span class="accent">праздник вкуса!</span></h2>
+        <p>Наши два кафе всегда готовы радовать вас любимыми блюдами:</p>
 
         <ul class="about-points">
-          <li>Шашлык на углях каждый день</li>
-          <li>Две точки в Оленегорске</li>
-          <li>Еда навынос и доставка</li>
-          <li>Оплата картой и наличными</li>
+          <li>Ароматный шашлык с дымком;</li>
+          <li>Сочный люля-кебаб;</li>
+          <li>Овощи-гриль, приготовленные на мангале;</li>
+          <li>Фирменные бургеры и хрустящий картофель фри;</li>
+          <li>Освежающие напитки на любой вкус.</li>
         </ul>
       </div>
     </div>
@@ -893,7 +881,7 @@
   <div class="container">
     <div class="cta-box">
       <h2>Закажите сейчас</h2>
-      <p>Позвоните нам, чтобы сделать заказ на вынос или вызвать доставку. Работаем ежедневно с 11 утра.</p>
+      <p>Работаем ежедневно с 11 утра.</p>
       <div class="cta-buttons">
         <a href="tel:+79210423878" class="btn btn-dark">📞 Позвонить</a>
       </div>
@@ -912,14 +900,12 @@
     <div class="contacts-grid">
       <a href="https://yandex.ru/maps/org/shashlychnaya/36257008439/" target="_blank" rel="noopener" class="contact-card">
         <span class="contact-icon">📍</span>
-        <h3>Заведение 1</h3>
         <div class="value">ул. Бардина, 27А</div>
-        <div class="note">Оленегорск, 184536</div>
+        <div class="note">Оленегорск</div>
       </a>
 
       <div class="contact-card">
         <span class="contact-icon">📍</span>
-        <h3>Заведение 2</h3>
         <div class="value">Парковая ул., 13А</div>
         <div class="note">Оленегорск</div>
       </div>
@@ -927,8 +913,7 @@
       <div class="contact-card">
         <span class="contact-icon">🕐</span>
         <h3>Часы работы</h3>
-        <div class="value">Пн–Чт, Вс 11:00–21:00</div>
-        <div class="note">Пт–Сб до 22:00</div>
+        <div class="value">Работаем с 11.00 до 21.00 всегда</div>
       </div>
 
       <div class="contact-card">
@@ -948,20 +933,11 @@
   </div>
 </section>
 
-<!-- ПЕРЕХОД НА ВТОРОЙ ВАРИАНТ -->
-<section class="switch-block">
-  <div class="container">
-    <div class="switch-label">Не нравится этот вариант?</div>
-    <h3 class="switch-title">Посмотрите <span class="accent">второй вариант</span> вашего сайта</h3>
-    <a href="v2.html" class="btn btn-primary">Смотреть второй вариант →</a>
-  </div>
-</section>
-
 <!-- ФУТЕР -->
 <footer>
   <div class="container">
     <div class="footer-logo">Шашлыч<span>ная</span></div>
-    © 2026 «Шашлычная» · Оленегорск: ул. Бардина, 27А
+    © 2026 «Шашлычная» · Оленегорск: ул. Бардина, 27А и Парковая, 13А
   </div>
 </footer>
 
@@ -978,10 +954,24 @@
     btn.classList.add('active');
   }
 
-  function toggleDish(dish) {
-    const isOpen = dish.classList.contains('open');
-    document.querySelectorAll('.dish').forEach(d => d.classList.remove('open'));
-    if (!isOpen) dish.classList.add('open');
+  /* Слайдер в блоке "О нас" */
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.about-slide');
+  const dots = document.querySelectorAll('.about-dot');
+
+  function renderSlide() {
+    slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+    dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+  }
+
+  function changeSlide(dir) {
+    currentSlide = (currentSlide + dir + slides.length) % slides.length;
+    renderSlide();
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    renderSlide();
   }
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1002,6 +992,25 @@
       section.style.transform = 'translateY(40px)';
       section.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
       observer.observe(section);
+    });
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, i * 80);
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.dish, .contact-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      cardObserver.observe(el);
     });
   }
 
