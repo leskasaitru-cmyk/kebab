@@ -260,7 +260,6 @@
     z-index: 1;
   }
 
-  /* Кнопка "Уточнить" на месте ценника */
   .dish-cta {
     position: absolute;
     bottom: 16px;
@@ -319,7 +318,6 @@
     transform: scale(1.1) rotate(-5deg);
   }
 
-  /* ===== О НАС ===== */
   .about { background: var(--bg-soft); }
 
   .about-grid {
@@ -380,7 +378,6 @@
     font-size: 18px;
   }
 
-  /* ===== CTA ===== */
   .cta { padding: 100px 0; }
 
   .cta-box {
@@ -414,7 +411,6 @@
   }
   .btn-dark:hover { transform: translateY(-3px); background: #000; }
 
-  /* ===== КОНТАКТЫ ===== */
   .contacts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -472,7 +468,6 @@
   }
   footer .footer-logo span { color: var(--orange); }
 
-  /* ===== АДАПТИВ ===== */
   @media (max-width: 1024px) {
     .about-grid {
       grid-template-columns: 1fr 1fr;
@@ -505,7 +500,6 @@
       gap: 30px;
     }
     
-    /* Фотографии — максимально большие и одинаковые на телефоне */
     .about-visual {
       width: 100%;
       max-width: 100%;
@@ -541,7 +535,6 @@
     .cta-box { padding: 50px 22px; border-radius: 20px; }
     .cta-buttons { flex-direction: column; width: 100%; }
 
-    /* Фото ещё крупнее и одинаковые на маленьких экранах */
     .about-visual {
       min-height: 360px;
       padding: 30px 16px;
@@ -561,7 +554,6 @@
 </head>
 <body>
 
-<!-- ХЕДЕР -->
 <header>
   <div class="container header-inner">
     <a href="#" class="logo">
@@ -579,7 +571,6 @@
   </div>
 </header>
 
-<!-- ГЕРОЙ -->
 <section class="hero">
   <div class="container">
     <div class="hero-badge">★ Два заведения в городе</div>
@@ -593,7 +584,6 @@
   </div>
 </section>
 
-<!-- МЕНЮ -->
 <section id="menu">
   <div class="container">
     <div class="section-head">
@@ -602,7 +592,6 @@
 
     <div class="menu-grid">
 
-      <!-- Шашлык из свинины -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🍖</div>
@@ -614,7 +603,6 @@
         </div>
       </div>
 
-      <!-- Шашлык из курицы -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🍗</div>
@@ -626,7 +614,6 @@
         </div>
       </div>
 
-      <!-- Стейк из семги -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🥩</div>
@@ -638,7 +625,6 @@
         </div>
       </div>
 
-      <!-- Бургер -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🍔</div>
@@ -650,7 +636,6 @@
         </div>
       </div>
 
-      <!-- Люля-кебаб -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🌭</div>
@@ -662,7 +647,6 @@
         </div>
       </div>
 
-      <!-- Шаурма -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🌯</div>
@@ -674,7 +658,6 @@
         </div>
       </div>
 
-      <!-- Шампиньоны -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🍄</div>
@@ -686,7 +669,6 @@
         </div>
       </div>
 
-      <!-- Овощи на мангале -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🥦</div>
@@ -698,7 +680,6 @@
         </div>
       </div>
 
-      <!-- Лаваш -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🫓</div>
@@ -710,7 +691,6 @@
         </div>
       </div>
 
-      <!-- Соус белый -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🥣</div>
@@ -722,7 +702,6 @@
         </div>
       </div>
 
-      <!-- Картофель фри -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🍟</div>
@@ -734,7 +713,6 @@
         </div>
       </div>
 
-      <!-- Салат -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🥗</div>
@@ -746,7 +724,6 @@
         </div>
       </div>
 
-      <!-- Чай -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🍵</div>
@@ -758,7 +735,6 @@
         </div>
       </div>
 
-      <!-- Газированные напитки -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🥤</div>
@@ -770,7 +746,6 @@
         </div>
       </div>
 
-      <!-- Пиво -->
       <div class="dish">
         <div class="dish-photo">
           <div class="icon">🍺</div>
@@ -786,18 +761,15 @@
   </div>
 </section>
 
-<!-- О НАС -->
 <section class="about" id="about">
   <div class="container">
     <div class="about-grid">
       
-      <!-- ЛЕВОЕ ИЗОБРАЖЕНИЕ -->
       <div class="about-visual">
         <div class="icon">🔥</div>
         <div class="text">Здесь могла быть<br>фотография заведения</div>
       </div>
 
-      <!-- ТЕКСТ ПО ЦЕНТРУ -->
       <div class="about-text">
         <h2>Устройте себе <span class="accent">праздник вкуса!</span></h2>
         <p>Наши два кафе всегда готовы радовать вас любимыми блюдами:</p>
@@ -811,7 +783,6 @@
         </ul>
       </div>
 
-      <!-- ПРАВОЕ ИЗОБРАЖЕНИЕ -->
       <div class="about-visual">
         <div class="icon">🍢</div>
         <div class="text">Здесь могла быть<br>вторая фотография</div>
@@ -821,7 +792,6 @@
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta" id="booking">
   <div class="container">
     <div class="cta-box">
@@ -834,7 +804,6 @@
   </div>
 </section>
 
-<!-- КОНТАКТЫ -->
 <section id="contacts">
   <div class="container">
     <div class="section-head">
@@ -878,7 +847,6 @@
   </div>
 </section>
 
-<!-- ФУТЕР -->
 <footer>
   <div class="container">
     <div class="footer-logo">Шашлыч<span>ная</span></div>
@@ -887,7 +855,6 @@
 </footer>
 
 <script>
-  /* --- Плавное появление секций --- */
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!prefersReduced && 'IntersectionObserver' in window) {
@@ -928,7 +895,6 @@
     });
   }
 
-  /* --- Плавный скролл по якорям (в т.ч. кнопок "Уточнить") --- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const target = document.querySelector(this.getAttribute('href'));
